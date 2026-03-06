@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\IntroPostController;
 use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\UploadController;
+use App\Models\Contact;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,17 @@ use App\Http\Controllers\UploadController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::post('/lien-he', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'name'  => 'required|string|max:255',
+        'phone' => 'required|string|max:20',
+        'email' => 'nullable|email|max:255',
+        'description' => 'nullable|string|max:2000',
+    ]);
+    Contact::create($request->only('name', 'phone', 'email', 'description'));
+    return back()->with('success', 'Yêu cầu của bạn đã được gửi! Chúng tôi sẽ liên hệ sớm nhất.');
+})->name('contact.store');
 
 
 // Auth

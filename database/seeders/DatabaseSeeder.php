@@ -15,9 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         $this->call([
-       ConfigServerSeeder::class,
-    ]);
+        $this->call([
+            ConfigServerSeeder::class,
+            ServicePackageSeeder::class,
+            IntroPostSeeder::class,
+        ]);
         User::create([
             'name' => 'Test User',
             'email' => 'admin@gmail.com',
