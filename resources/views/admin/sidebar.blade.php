@@ -7,12 +7,12 @@
                  <span>Dashboard</span>
              </a>
          </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
              <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.lien_he.index']) ? '' : 'collapsed' }}" href="{{route('admin.lien_he.index')}}">
                  <i class="bi bi-envelope"></i>
                  <span>Liên hệ</span>
              </a>
-         </li>
+         </li> --}}
          <li class="nav-item">
              <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.goi_dich_vu.index', 'admin.goi_dich_vu.create', 'admin.goi_dich_vu.edit']) ? '' : 'collapsed' }}" href="{{route('admin.goi_dich_vu.index')}}">
                  <i class="bi bi-box-seam"></i>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboadController;
 use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\IntroPostController;
+use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\UploadController;
 
 /*
@@ -14,10 +15,8 @@ use App\Http\Controllers\UploadController;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
