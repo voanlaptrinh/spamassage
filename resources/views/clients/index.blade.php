@@ -69,14 +69,25 @@
 <main id="main-content" tabindex="-1">
 
 {{-- ===== HERO ===== --}}
-<section class="hero" id="home" aria-labelledby="hero-heading">
+<section class="hero" id="home" aria-labelledby="hero-heading"
+    @if($banner->image)
+        style="background-image: linear-gradient(135deg, rgba(26,18,9,.85) 0%, rgba(45,31,10,.8) 100%), url('{{ asset('storage/' . $banner->image) }}'); background-size: cover; background-position: center;"
+    @endif>
     <div class="hero-content">
-        <div class="hero-badge" aria-hidden="true">Chào mừng đến với chúng tôi</div>
-        <h1 id="hero-heading">Phục Hồi Sức Khỏe<br><em>Toàn Diện & Thư Giãn</em></h1>
-        <p>Trải nghiệm liệu pháp spa & massage chuyên nghiệp — nơi không gian yên tĩnh và bàn tay lành nghề giúp bạn tìm lại cân bằng.</p>
+        @if($banner->badge_text)
+        <div class="hero-badge" aria-hidden="true">{{ $banner->badge_text }}</div>
+        @endif
+        <h1 id="hero-heading">{{ $banner->title }}</h1>
+        @if($banner->description)
+        <p>{{ $banner->description }}</p>
+        @endif
         <div class="hero-btns">
-            <a href="#services" class="btn-gold">Khám phá dịch vụ</a>
-            <a href="#posts" class="btn-outline-gold">Tìm hiểu thêm</a>
+            @if($banner->btn_primary_text)
+            <a href="{{ $banner->btn_primary_url ?? '#' }}" class="btn-gold">{{ $banner->btn_primary_text }}</a>
+            @endif
+            @if($banner->btn_secondary_text)
+            <a href="{{ $banner->btn_secondary_url ?? '#' }}" class="btn-outline-gold">{{ $banner->btn_secondary_text }}</a>
+            @endif
         </div>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -185,9 +196,11 @@
         <p class="section-desc">Chọn gói dịch vụ phù hợp với nhu cầu — từ thư giãn nhẹ nhàng đến phục hồi chuyên sâu.</p>
 
         @if($servicePackages->isNotEmpty())
+        @php $showMore = $servicePackages->count() > 6; @endphp
         <ul class="services-grid" role="list" aria-label="Danh sách gói dịch vụ">
-            @foreach($servicePackages as $pkg)
-            <li class="service-card" role="listitem">
+            @foreach($servicePackages as $i => $pkg)
+            <li class="service-card{{ $i >= 6 ? ' service-card--hidden' : '' }}" role="listitem"
+                @if($i >= 6) aria-hidden="true" @endif>
                 <div class="service-img">
                     @if($pkg->image)
                         <img src="{{ asset('storage/' . $pkg->image) }}"
@@ -213,6 +226,17 @@
             </li>
             @endforeach
         </ul>
+
+        @if($showMore)
+        <div style="text-align:center;margin-top:40px">
+            <button id="btnShowMore" class="btn-show-more" onclick="toggleServices()"
+                aria-expanded="false" aria-controls="services-grid">
+                <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>
+                Xem thêm dịch vụ
+                <span class="show-more-count">({{ $servicePackages->count() - 6 }} dịch vụ)</span>
+            </button>
+        </div>
+        @endif
         @else
         <div style="text-align:center;padding:60px 0;color:#aaa;" role="status">
             <i class="bi bi-flower2" style="font-size:3rem;display:block;margin-bottom:16px;color:#e8d5b0" aria-hidden="true"></i>
@@ -223,97 +247,109 @@
 </section>
 
 {{-- ===== CONTACT ===== --}}
-<section id="contact" aria-labelledby="contact-heading">
-    <div class="section-inner">
-        <span class="section-label" aria-hidden="true">Liên hệ với chúng tôi</span>
-        <h2 class="section-title" id="contact-heading">Thông Tin Liên Hệ</h2>
-        <div class="divider" aria-hidden="true"></div>
-        <p class="section-desc">Liên hệ với chúng tôi để được hỗ trợ và tư vấn trực tiếp.</p>
+@php $cfg = get_config(); @endphp
+<section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="contact-wrap">
 
-        @php $cfg = get_config(); @endphp
+        {{-- Cột trái: thông tin --}}
+        <div class="contact-left">
+            <span class="contact-eyebrow" aria-hidden="true">Liên hệ với chúng tôi</span>
+            <h2 id="contact-heading">Luôn Sẵn Sàng<br>Phục Vụ Bạn</h2>
+            <p class="contact-sub">Đội ngũ của chúng tôi luôn sẵn sàng tư vấn và hỗ trợ bạn mọi lúc.</p>
 
-        <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;max-width:900px;margin:0 auto;list-style:none;padding:0"
-            aria-label="Thông tin liên hệ">
-
-            <li class="contact-item" style="background:var(--light);padding:24px;border-radius:var(--radius)">
-                <div class="contact-icon" aria-hidden="true"><i class="bi bi-geo-alt-fill"></i></div>
-                <div>
-                    <div class="lbl" id="lbl-addr">Địa chỉ</div>
-                    <address class="val" aria-labelledby="lbl-addr" style="font-style:normal">
-                        {{ $cfg->address ?? '123 Đường Nguyễn Thị Minh Khai, Quận 3, TP. Hồ Chí Minh' }}
-                    </address>
-                </div>
-            </li>
-
-            <li class="contact-item" style="background:var(--light);padding:24px;border-radius:var(--radius)">
-                <div class="contact-icon" aria-hidden="true"><i class="bi bi-telephone-fill"></i></div>
-                <div>
-                    <div class="lbl" id="lbl-phone">Hotline</div>
-                    <div class="val">
-                        <a href="tel:{{ preg_replace('/\s+/', '', $cfg->hotline ?? '0909123456') }}"
-                            aria-labelledby="lbl-phone"
-                            aria-label="Gọi hotline {{ $cfg->hotline ?? '0909 123 456' }}">
-                            {{ $cfg->hotline ?? '0909 123 456' }}
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="contact-item" style="background:var(--light);padding:24px;border-radius:var(--radius)">
-                <div class="contact-icon" aria-hidden="true"><i class="bi bi-envelope-fill"></i></div>
-                <div>
-                    <div class="lbl" id="lbl-email">Email</div>
-                    <div class="val">
-                        <a href="mailto:{{ $cfg->email ?? 'lienhe@spamassage.vn' }}"
-                            aria-label="Gửi email đến {{ $cfg->email ?? 'lienhe@spamassage.vn' }}">
-                            {{ $cfg->email ?? 'lienhe@spamassage.vn' }}
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="contact-item" style="background:var(--light);padding:24px;border-radius:var(--radius)">
-                <div class="contact-icon" aria-hidden="true"><i class="bi bi-clock-fill"></i></div>
-                <div>
-                    <div class="lbl">Giờ hoạt động</div>
-                    <div class="val">Thứ 2 – Chủ nhật: 9:00 – 22:00</div>
-                </div>
-            </li>
-
-        </ul>
-
-        @if($cfg->facebook_url || $cfg->zalo_url || $cfg->instagram_url)
-        <nav aria-label="Mạng xã hội" style="display:flex;gap:12px;justify-content:center;margin-top:32px">
-            @if($cfg->facebook_url)
-            <a href="{{ $cfg->facebook_url }}" target="_blank" rel="noopener noreferrer"
-                aria-label="Trang Facebook của chúng tôi (mở tab mới)"
-                style="width:46px;height:46px;border-radius:50%;background:var(--light);border:1px solid #e8d5b0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;transition:.2s">
-                <i class="bi bi-facebook" aria-hidden="true"></i>
+            {{-- Hotline nổi bật --}}
+            @if($cfg->hotline ?? false)
+            <a href="tel:{{ preg_replace('/\s+/', '', $cfg->hotline) }}"
+                class="contact-cta-phone"
+                aria-label="Gọi hotline {{ $cfg->hotline }}">
+                <span class="contact-cta-icon" aria-hidden="true">
+                    <i class="bi bi-telephone-fill"></i>
+                </span>
+                <span>
+                    <span class="contact-cta-label">Gọi ngay hotline</span>
+                    <span class="contact-cta-number">{{ $cfg->hotline }}</span>
+                </span>
             </a>
             @endif
-            @if($cfg->zalo_url)
-            <a href="{{ $cfg->zalo_url }}" target="_blank" rel="noopener noreferrer"
-                aria-label="Nhắn tin Zalo với chúng tôi (mở tab mới)"
-                style="width:46px;height:46px;border-radius:50%;background:var(--light);border:1px solid #e8d5b0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;transition:.2s">
-                <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
-            </a>
-            @endif
-            @if($cfg->instagram_url)
-            <a href="{{ $cfg->instagram_url }}" target="_blank" rel="noopener noreferrer"
-                aria-label="Trang Instagram của chúng tôi (mở tab mới)"
-                style="width:46px;height:46px;border-radius:50%;background:var(--light);border:1px solid #e8d5b0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;transition:.2s">
-                <i class="bi bi-instagram" aria-hidden="true"></i>
-            </a>
-            @endif
-        </nav>
-        @endif
 
-        @if($cfg->google_map_embed)
-        <div style="margin-top:40px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)"
-            role="region" aria-label="Bản đồ vị trí cửa hàng">
-            {!! $cfg->google_map_embed !!}
+            {{-- Thông tin phụ --}}
+            <ul class="contact-info-list" aria-label="Thông tin liên hệ">
+                @if($cfg->address ?? false)
+                <li>
+                    <span class="ci-icon" aria-hidden="true"><i class="bi bi-geo-alt-fill"></i></span>
+                    <span>
+                        <span class="ci-label">Địa chỉ</span>
+                        <address style="font-style:normal">{{ $cfg->address }}</address>
+                    </span>
+                </li>
+                @endif
+                @if($cfg->email ?? false)
+                <li>
+                    <span class="ci-icon" aria-hidden="true"><i class="bi bi-envelope-fill"></i></span>
+                    <span>
+                        <span class="ci-label">Email</span>
+                        <a href="mailto:{{ $cfg->email }}" aria-label="Gửi email đến {{ $cfg->email }}">{{ $cfg->email }}</a>
+                    </span>
+                </li>
+                @endif
+                <li>
+                    <span class="ci-icon" aria-hidden="true"><i class="bi bi-clock-fill"></i></span>
+                    <span>
+                        <span class="ci-label">Giờ hoạt động</span>
+                        <span>Thứ 2 – Chủ nhật: 9:00 – 22:00</span>
+                    </span>
+                </li>
+            </ul>
+
+            {{-- Mạng xã hội --}}
+            @if($cfg->facebook_url || $cfg->zalo_url || $cfg->instagram_url || $cfg->tiktok_url)
+            <nav aria-label="Mạng xã hội" class="contact-socials">
+                @if($cfg->facebook_url)
+                <a href="{{ $cfg->facebook_url }}" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook (mở tab mới)" class="csoc-btn">
+                    <i class="bi bi-facebook" aria-hidden="true"></i>
+                    <span>Facebook</span>
+                </a>
+                @endif
+                @if($cfg->zalo_url)
+                <a href="{{ $cfg->zalo_url }}" target="_blank" rel="noopener noreferrer"
+                    aria-label="Zalo (mở tab mới)" class="csoc-btn">
+                    <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+                    <span>Zalo</span>
+                </a>
+                @endif
+                @if($cfg->instagram_url)
+                <a href="{{ $cfg->instagram_url }}" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram (mở tab mới)" class="csoc-btn">
+                    <i class="bi bi-instagram" aria-hidden="true"></i>
+                    <span>Instagram</span>
+                </a>
+                @endif
+                @if($cfg->tiktok_url)
+                <a href="{{ $cfg->tiktok_url }}" target="_blank" rel="noopener noreferrer"
+                    aria-label="TikTok (mở tab mới)" class="csoc-btn">
+                    <i class="bi bi-tiktok" aria-hidden="true"></i>
+                    <span>TikTok</span>
+                </a>
+                @endif
+            </nav>
+            @endif
         </div>
-        @endif
+
+        {{-- Cột phải: bản đồ --}}
+        <div class="contact-right">
+            @if($cfg->google_map_embed ?? false)
+            <div class="contact-map" role="region" aria-label="Bản đồ vị trí cửa hàng">
+                {!! $cfg->google_map_embed !!}
+            </div>
+            @else
+            <div class="contact-map-placeholder" aria-hidden="true">
+                <i class="bi bi-map" style="font-size:3rem;color:rgba(255,255,255,.2)"></i>
+                <p style="color:rgba(255,255,255,.3);margin-top:12px">Bản đồ đang cập nhật</p>
+            </div>
+            @endif
+        </div>
+
     </div>
 </section>
 
@@ -460,6 +496,26 @@ document.addEventListener('keydown', e => {
         }
     }
 });
+
+// Toggle dịch vụ ẩn
+function toggleServices() {
+    const btn     = document.getElementById('btnShowMore');
+    const hidden  = document.querySelectorAll('.service-card--hidden');
+    const isOpen  = btn.getAttribute('aria-expanded') === 'true';
+
+    hidden.forEach(card => {
+        card.style.display = isOpen ? 'none' : '';
+        card.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+    });
+
+    btn.setAttribute('aria-expanded', !isOpen);
+    btn.innerHTML = isOpen
+        ? `<i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Xem thêm dịch vụ <span class="show-more-count">(${hidden.length} dịch vụ)</span>`
+        : `<i class="bi bi-chevron-up" aria-hidden="true"></i> Thu gọn`;
+}
+
+// Ẩn ban đầu các card hidden
+document.querySelectorAll('.service-card--hidden').forEach(c => c.style.display = 'none');
 
 // Post modal
 function openPostModal(index) {

@@ -54,6 +54,27 @@ class ServicePackageSeeder extends Seeder
                 'meta_title'       => 'Massage Đầu Cổ Vai Gáy - Giảm Đau Nhanh',
                 'meta_description' => 'Liệu trình tập trung vùng đầu, cổ và vai gáy, giúp giảm đau nhức, căng cơ do ngồi làm việc lâu và cải thiện giấc ngủ.',
             ],
+            [
+                'name'             => 'Massage Đầu & Cổ Vai Gáy',
+                'price'            => 200000,
+                'is_active'        => true,
+                'meta_title'       => 'Massage Đầu Cổ Vai Gáy - Giảm Đau Nhanh',
+                'meta_description' => 'Liệu trình tập trung vùng đầu, cổ và vai gáy, giúp giảm đau nhức, căng cơ do ngồi làm việc lâu và cải thiện giấc ngủ.',
+            ],
+            [
+                'name'             => 'Massage Đầu & Cổ Vai Gáy',
+                'price'            => 200000,
+                'is_active'        => true,
+                'meta_title'       => 'Massage Đầu Cổ Vai Gáy - Giảm Đau Nhanh',
+                'meta_description' => 'Liệu trình tập trung vùng đầu, cổ và vai gáy, giúp giảm đau nhức, căng cơ do ngồi làm việc lâu và cải thiện giấc ngủ.',
+            ],
+            [
+                'name'             => 'Massage Đầu & Cổ Vai Gáy',
+                'price'            => 200000,
+                'is_active'        => true,
+                'meta_title'       => 'Massage Đầu Cổ Vai Gáy - Giảm Đau Nhanh',
+                'meta_description' => 'Liệu trình tập trung vùng đầu, cổ và vai gáy, giúp giảm đau nhức, căng cơ do ngồi làm việc lâu và cải thiện giấc ngủ.',
+            ],
         ];
 
         foreach ($packages as $data) {

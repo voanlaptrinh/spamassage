@@ -14,6 +14,12 @@
              </a>
          </li> --}}
          <li class="nav-item">
+            <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.banner.edit']) ? '' : 'collapsed' }}" href="{{ route('admin.banner.edit') }}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Banner</span>
+            </a>
+        </li>
+        <li class="nav-item">
              <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.goi_dich_vu.index', 'admin.goi_dich_vu.create', 'admin.goi_dich_vu.edit']) ? '' : 'collapsed' }}" href="{{route('admin.goi_dich_vu.index')}}">
                  <i class="bi bi-box-seam"></i>
                  <span>Gói dịch vụ</span>

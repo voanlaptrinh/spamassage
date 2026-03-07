@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboadController;
 use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\IntroPostController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\UploadController;
 use App\Models\Contact;
@@ -60,6 +61,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
     Route::get('/lien-he', [ContactController::class, 'index'])->name('lien_he.index');
+
+    // Banner
+    Route::get('/banner', [BannerController::class, 'edit'])->name('banner.edit');
+    Route::put('/banner/{banner}', [BannerController::class, 'update'])->name('banner.update');
 
     Route::prefix('web-config')->name('web-config.')->group(function () {
         Route::get('/', [ConfigServeController::class, 'edit'])->name('edit');
