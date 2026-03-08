@@ -31,13 +31,14 @@ class ServicePackageController extends Controller
     {
         $request->validate([
             'name'             => 'required|string|max:255',
+            'description'      => 'nullable|string',
             'price'            => 'required|numeric|min:0',
             'image'            => 'nullable|image|max:5120',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
         ]);
 
-        $data = $request->only(['name', 'price', 'meta_title', 'meta_description']);
+        $data = $request->only(['name', 'description', 'price', 'meta_title', 'meta_description']);
         $data['is_active'] = $request->boolean('is_active', true);
 
         if ($request->hasFile('image')) {
@@ -58,13 +59,14 @@ class ServicePackageController extends Controller
     {
         $request->validate([
             'name'             => 'required|string|max:255',
+            'description'      => 'nullable|string',
             'price'            => 'required|numeric|min:0',
             'image'            => 'nullable|image|max:5120',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
         ]);
 
-        $data = $request->only(['name', 'price', 'meta_title', 'meta_description']);
+        $data = $request->only(['name', 'description', 'price', 'meta_title', 'meta_description']);
         $data['is_active'] = $request->boolean('is_active', true);
 
         if ($request->hasFile('image')) {

@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="canonical" href="https://thanhmayntd.com" />
+    <link rel="canonical" href="" />
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icons/favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/icons/favicon-32x32.png') }}">
@@ -27,7 +27,7 @@
     <link rel="apple-touch-startup-image" href="{{ asset('/icons/apple-touch-icon-180x180.png') }}" />
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="NTD">
-    <meta property="og:url" content="https://thanhmayntd.com">
+    <meta property="og:url" content="">
     <meta property="og:title" content="{{ get_config()->meta_title ?? 'Công ty TNHH Tự Động Hoá NTD' }}">
     <meta property="og:description"
         content="{{ get_config()->meta_description ?? 'Công ty TNHH Tự Động Hoá NTD chuyên tư vấn, lắp đặt và bảo trì thang máy dân dụng & công nghiệp. An toàn, uy tín, chuyên nghiệp toàn quốc.' }}">
@@ -43,8 +43,6 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('/admin/css/toastr.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/admin/css/cropper.min.css') }}" rel="stylesheet">
-
 
 </head>
 

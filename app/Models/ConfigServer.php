@@ -23,6 +23,8 @@ class ConfigServer extends Model
         'instagram_url',
         'linkedin_url',
         'twitter_url',
+        'whatsapp_url',
+        'viber_url',
         'meta_title',
         'meta_keywords',
         'meta_description',

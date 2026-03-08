@@ -83,7 +83,7 @@
                     <h5 class="border-bottom pb-2 mb-3">Mạng xã hội</h5>
                 </div>
 
-                @foreach (['facebook', 'zalo', 'youtube', 'tiktok', 'instagram', 'linkedin', 'twitter'] as $platform)
+                @foreach (['facebook', 'zalo', 'youtube', 'tiktok', 'instagram', 'linkedin', 'twitter', 'whatsapp', 'viber'] as $platform)
                     <div class="col-md-6">
                         <label>{{ ucfirst($platform) }} URL</label>
                         <input name="{{ $platform }}_url" type="url" class="form-control @error($platform . '_url') is-invalid @enderror"

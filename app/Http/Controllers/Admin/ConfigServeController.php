@@ -55,6 +55,8 @@ class ConfigServeController extends Controller
                 'instagram_url' => 'nullable|url|max:255',
                 'linkedin_url' => 'nullable|url|max:255',
                 'twitter_url' => 'nullable|url|max:255',
+                'whatsapp_url' => 'nullable|url|max:255',
+                'viber_url' => 'nullable|url|max:255',
 
                 // SEO
                 'meta_title' => 'nullable|string|max:255',
@@ -105,7 +107,7 @@ class ConfigServeController extends Controller
             // Update config server
             $configServer->update($validatedData);
 
-            return redirect()->route('web-config.edit')
+            return redirect()->route('admin.web-config.edit')
                 ->with('success', 'Cập nhật cấu hình server thành công');
 
         } catch (ValidationException $e) {

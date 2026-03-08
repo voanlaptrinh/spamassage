@@ -45,6 +45,21 @@
 
                     <div class="mb-4">
                         <label class="form-label fw-semibold mb-1">
+                            Mô tả gói dịch vụ
+                        </label>
+                        <textarea name="description"
+                            class="form-control @error('description') is-invalid @enderror"
+                            rows="4"
+                            placeholder="Nhập mô tả chi tiết về gói dịch vụ này...">{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback d-flex align-items-center gap-1">
+                                <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold mb-1">
                             Giá dịch vụ <span class="text-danger">*</span>
                         </label>
                         <div class="input-group input-group-lg">
