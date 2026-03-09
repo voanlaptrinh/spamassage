@@ -13,6 +13,7 @@ class ServicePackageSeeder extends Seeder
 
         $packages = [
             [
+                'sort_order'       => 1,
                 'name'             => 'Massage Thư Giãn Toàn Thân',
                 'description'      => 'Liệu trình massage toàn thân 60 phút giúp giải tỏa căng thẳng, cải thiện tuần hoàn máu và phục hồi năng lượng sau ngày dài làm việc.',
                 'price'            => 350000,
@@ -21,6 +22,7 @@ class ServicePackageSeeder extends Seeder
                 'meta_description' => 'Liệu trình massage toàn thân 60 phút giúp giải tỏa căng thẳng, cải thiện tuần hoàn máu và phục hồi năng lượng sau ngày dài làm việc.',
             ],
             [
+                'sort_order'       => 2,
                 'name'             => 'Massage Đá Nóng (Hot Stone)',
                 'description'      => 'Sử dụng các loại đá tự nhiên được làm nóng để truyền nhiệt sâu vào các bó cơ, giúp giảm đau nhức xương khớp và cân bằng năng lượng cơ thể.',
                 'price'            => 550000,
@@ -29,6 +31,7 @@ class ServicePackageSeeder extends Seeder
                 'meta_description' => 'Liệu trình đá nóng độc đáo giúp thư giãn cơ sâu, giảm đau nhức xương khớp và cân bằng năng lượng cơ thể.',
             ],
             [
+                'sort_order'       => 3,
                 'name'             => 'Chăm Sóc Da Mặt Cơ Bản',
                 'description'      => 'Quy trình 5 bước chăm sóc da mặt: làm sạch sâu, tẩy tế bào chết, xông hơi, hút bã nhờn và dưỡng ẩm chuyên sâu giúp da sáng mịn tự nhiên.',
                 'price'            => 280000,
@@ -37,6 +40,7 @@ class ServicePackageSeeder extends Seeder
                 'meta_description' => 'Liệu trình chăm sóc da mặt làm sạch sâu, tẩy tế bào chết và dưỡng ẩm chuyên sâu giúp da sáng mịn tự nhiên.',
             ],
             [
+                'sort_order'       => 4,
                 'name'             => 'Massage Thái Cổ Truyền',
                 'description'      => 'Kết hợp giữa các động tác ấn huyệt và kéo giãn kiểu yoga truyền thống Thái Lan, giúp tăng độ linh hoạt của khớp và giảm căng cơ hiệu quả.',
                 'price'            => 450000,
@@ -45,6 +49,7 @@ class ServicePackageSeeder extends Seeder
                 'meta_description' => 'Kỹ thuật massage Thái truyền thống kết hợp kéo giãn cơ thể và ấn huyệt, giúp tăng độ linh hoạt và giảm đau cơ hiệu quả.',
             ],
             [
+                'sort_order'       => 5,
                 'name'             => 'Liệu Trình Dưỡng Thể Toàn Diện',
                 'description'      => 'Gói liệu trình cao cấp trong 90 phút bao gồm: tẩy tế bào chết bằng muối biển, ủ dưỡng thảo mộc và massage tinh dầu toàn thân.',
                 'price'            => 750000,
@@ -53,14 +58,7 @@ class ServicePackageSeeder extends Seeder
                 'meta_description' => 'Gói liệu trình cao cấp kết hợp tẩy tế bào chết, ủ dưỡng và massage toàn thân — trải nghiệm spa đẳng cấp trong 90 phút.',
             ],
             [
-                'name'             => 'Massage Đầu & Cổ Vai Gáy',
-                'description'      => 'Tập trung giải quyết các điểm đau nhức vùng cổ, vai và gáy cho nhân viên văn phòng, giúp giảm đau mỏi nhanh chóng và cải thiện giấc ngủ.',
-                'price'            => 200000,
-                'is_active'        => true,
-                'meta_title'       => 'Massage Đầu Cổ Vai Gáy - Giảm Đau Nhanh',
-                'meta_description' => 'Liệu trình tập trung vùng đầu, cổ và vai gáy, giúp giảm đau nhức, căng cơ do ngồi làm việc lâu và cải thiện giấc ngủ.',
-            ],
-            [
+                'sort_order'       => 6,
                 'name'             => 'Massage Đầu & Cổ Vai Gáy',
                 'description'      => 'Tập trung giải quyết các điểm đau nhức vùng cổ, vai và gáy cho nhân viên văn phòng, giúp giảm đau mỏi nhanh chóng và cải thiện giấc ngủ.',
                 'price'            => 200000,

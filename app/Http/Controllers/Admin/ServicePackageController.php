@@ -11,7 +11,7 @@ class ServicePackageController extends Controller
 {
     public function index(Request $request)
     {
-        $query = ServicePackage::latest();
+        $query = ServicePackage::orderBy('sort_order');
 
         if ($request->filled('name')) {
             $query->where('name', 'like', '%' . $request->name . '%');
@@ -39,7 +39,8 @@ class ServicePackageController extends Controller
         ]);
 
         $data = $request->only(['name', 'description', 'price', 'meta_title', 'meta_description']);
-        $data['is_active'] = $request->boolean('is_active', true);
+        $data['is_active']  = $request->boolean('is_active');
+        $data['sort_order'] = (ServicePackage::max('sort_order') ?? 0) + 1;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('goi_dich_vu', 'public');
@@ -62,12 +63,27 @@ class ServicePackageController extends Controller
             'description'      => 'nullable|string',
             'price'            => 'required|numeric|min:0',
             'image'            => 'nullable|image|max:5120',
+            'sort_order'       => 'nullable|integer|min:0',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
         ]);
 
         $data = $request->only(['name', 'description', 'price', 'meta_title', 'meta_description']);
-        $data['is_active'] = $request->boolean('is_active', true);
+        $data['is_active'] = $request->boolean('is_active');
+
+        $newOrder = (int) $request->input('sort_order', $goiDichVu->sort_order);
+        if ($newOrder !== $goiDichVu->sort_order) {
+            $conflict = ServicePackage::where('sort_order', $newOrder)->where('id', '!=', $goiDichVu->id)->first();
+            if ($conflict) {
+                $conflict->update(['sort_order' => $goiDichVu->sort_order]);
+            }
+        }
+        $data['sort_order'] = $newOrder;
+
+        if ($request->boolean('remove_image') && $goiDichVu->image) {
+            Storage::disk('public')->delete($goiDichVu->image);
+            $data['image'] = null;
+        }
 
         if ($request->hasFile('image')) {
             if ($goiDichVu->image) {

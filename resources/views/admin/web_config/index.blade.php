@@ -78,22 +78,6 @@
                     @enderror
                 </div>
 
-                <!-- Mạng xã hội -->
-                <div class="col-12 mt-4">
-                    <h5 class="border-bottom pb-2 mb-3">Mạng xã hội</h5>
-                </div>
-
-                @foreach (['facebook', 'zalo', 'youtube', 'tiktok', 'instagram', 'linkedin', 'twitter', 'whatsapp', 'viber'] as $platform)
-                    <div class="col-md-6">
-                        <label>{{ ucfirst($platform) }} URL</label>
-                        <input name="{{ $platform }}_url" type="url" class="form-control @error($platform . '_url') is-invalid @enderror"
-                            value="{{ old($platform . '_url', $config->{$platform . '_url'}) }}" placeholder="https://{{ $platform }}.com/...">
-                        @error($platform . '_url')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                @endforeach
-
                 <!-- SEO -->
                 <div class="col-12 mt-4">
                     <h5 class="border-bottom pb-2 mb-3">SEO</h5>

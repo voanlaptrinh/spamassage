@@ -152,6 +152,8 @@
                 </div>
                 <div class="card-body">
 
+                    <input type="hidden" name="remove_image" id="removeImageFlag" value="0">
+
                     {{-- Ảnh hiện tại --}}
                     @if($item->image)
                     <div id="currentWrap" class="mb-3">
@@ -161,10 +163,16 @@
                             <small class="text-muted d-flex align-items-center gap-1">
                                 <i class="bi bi-check-circle-fill text-success"></i> Ảnh hiện tại
                             </small>
-                            <button type="button" onclick="document.getElementById('image').click()"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-arrow-repeat me-1"></i>Thay ảnh
-                            </button>
+                            <div class="d-flex gap-1">
+                                <button type="button" onclick="document.getElementById('image').click()"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-arrow-repeat me-1"></i>Thay ảnh
+                                </button>
+                                <button type="button" onclick="deleteCurrentImage()"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash me-1"></i>Xóa ảnh
+                                </button>
+                            </div>
                         </div>
                     </div>
                     @endif
@@ -209,6 +217,14 @@
                     </button>
                 </div>
 
+                <div class="card-body py-3 border-top">
+                    <label class="form-label fw-semibold mb-1">
+                        <i class="bi bi-sort-numeric-up me-1 text-muted"></i>Thứ tự hiển thị
+                    </label>
+                    <input type="number" name="sort_order" min="0" class="form-control"
+                        value="{{ old('sort_order', $item->sort_order) }}" placeholder="0">
+                    <small class="text-muted">Số nhỏ hơn hiển thị trước</small>
+                </div>
                 <div class="card-footer bg-white border-top py-3 d-flex gap-2 justify-content-end">
                     <a href="{{ route('admin.goi_dich_vu.index') }}" class="btn btn-outline-secondary px-3">
                         <i class="bi bi-arrow-left me-1"></i>Hủy
@@ -309,6 +325,13 @@
         fileName.textContent = '';
         if (currentWrap) currentWrap.style.display = 'block';
         else uploadArea.classList.remove('d-none');
+    }
+
+    function deleteCurrentImage() {
+        if (!confirm('Xóa ảnh hiện tại? Ảnh sẽ bị xóa khi bạn lưu.')) return;
+        document.getElementById('removeImageFlag').value = '1';
+        if (currentWrap) currentWrap.style.display = 'none';
+        uploadArea.classList.remove('d-none');
     }
 </script>
 @endpush

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboadController;
 use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\IntroPostController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\UploadController;
 use App\Models\Contact;
@@ -61,6 +62,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
     Route::get('/lien-he', [ContactController::class, 'index'])->name('lien_he.index');
+
+    // Mạng xã hội
+    Route::get('/mang-xa-hoi', [SocialLinkController::class, 'index'])->name('mang_xa_hoi.index');
+    Route::get('/mang-xa-hoi/them', [SocialLinkController::class, 'create'])->name('mang_xa_hoi.create');
+    Route::post('/mang-xa-hoi', [SocialLinkController::class, 'store'])->name('mang_xa_hoi.store');
+    Route::get('/mang-xa-hoi/{mangXaHoi}/sua', [SocialLinkController::class, 'edit'])->name('mang_xa_hoi.edit');
+    Route::put('/mang-xa-hoi/{mangXaHoi}', [SocialLinkController::class, 'update'])->name('mang_xa_hoi.update');
+    Route::delete('/mang-xa-hoi/{mangXaHoi}', [SocialLinkController::class, 'destroy'])->name('mang_xa_hoi.destroy');
 
     // Banner
     Route::get('/banner', [BannerController::class, 'edit'])->name('banner.edit');

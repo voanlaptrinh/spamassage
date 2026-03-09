@@ -32,6 +32,12 @@
              </a>
          </li>
         <li class="nav-item">
+            <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.mang_xa_hoi.index', 'admin.mang_xa_hoi.create', 'admin.mang_xa_hoi.edit']) ? '' : 'collapsed' }}" href="{{ route('admin.mang_xa_hoi.index') }}">
+                <i class="bi bi-share"></i>
+                <span>Mạng xã hội</span>
+            </a>
+        </li>
+        <li class="nav-item">
              <a class="nav-link {{ in_array(Request::route()->getName(), ['admin.web-config.edit']) ? '' : 'collapsed' }}" href="{{route('admin.web-config.edit')}}">
                  <i class="bi bi-gear"></i>
                  <span>Cài đặt</span>

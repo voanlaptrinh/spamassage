@@ -14,6 +14,7 @@ class IntroPost extends Model
         'content',
         'image',
         'is_active',
+        'sort_order',
         'meta_title',
         'meta_description',
     ];

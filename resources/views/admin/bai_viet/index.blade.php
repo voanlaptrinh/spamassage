@@ -46,6 +46,7 @@
                     <tr class="table-light text-uppercase" style="font-size:.75rem;letter-spacing:.05em">
                         <th class="ps-4" style="width:80px">Ảnh</th>
                         <th>Tiêu đề</th>
+                        <th class="text-center" style="width:90px">Thứ tự</th>
                         <th class="text-center" style="width:120px">Trạng thái</th>
                         <th class="text-center" style="width:130px">Ngày tạo</th>
                         <th class="text-center pe-4" style="width:110px">Thao tác</th>
@@ -73,6 +74,9 @@
                                     {{ $item->meta_description }}
                                 </div>
                             @endif
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-light text-dark border fw-semibold">{{ $item->sort_order }}</span>
                         </td>
                         <td class="text-center">
                             @if($item->is_active)

@@ -42,8 +42,8 @@ class IntroPostSeeder extends Seeder
             ],
         ];
 
-        foreach ($posts as $data) {
-            IntroPost::create($data);
+        foreach ($posts as $i => $data) {
+            IntroPost::create(array_merge($data, ['sort_order' => $i + 1]));
         }
     }
 }

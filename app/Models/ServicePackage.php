@@ -15,6 +15,7 @@ class ServicePackage extends Model
         'price',
         'image',
         'is_active',
+        'sort_order',
         'meta_title',
         'meta_description',
     ];

@@ -148,6 +148,8 @@
                     </div>
                     <div class="card-body">
 
+                        <input type="hidden" name="remove_image" id="removeImageFlag" value="0">
+
                         @if($banner->image)
                         <div id="currentWrap" class="mb-3">
                             <img src="{{ asset('storage/' . $banner->image) }}" alt="Banner hiện tại"
@@ -156,10 +158,16 @@
                                 <small class="text-muted d-flex align-items-center gap-1">
                                     <i class="bi bi-check-circle-fill text-success"></i> Ảnh hiện tại
                                 </small>
-                                <button type="button" onclick="document.getElementById('image').click()"
-                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-arrow-repeat me-1"></i>Thay ảnh
-                                </button>
+                                <div class="d-flex gap-1">
+                                    <button type="button" onclick="document.getElementById('image').click()"
+                                        class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-arrow-repeat me-1"></i>Thay ảnh
+                                    </button>
+                                    <button type="button" onclick="deleteCurrentImage()"
+                                        class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash me-1"></i>Xóa ảnh
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         @endif
@@ -262,6 +270,13 @@ function removeImage() {
     fileName.textContent = '';
     if (currentWrap) currentWrap.style.display = 'block';
     else uploadArea.classList.remove('d-none');
+}
+
+function deleteCurrentImage() {
+    if (!confirm('Xóa ảnh nền banner? Ảnh sẽ bị xóa khi bạn lưu.')) return;
+    document.getElementById('removeImageFlag').value = '1';
+    if (currentWrap) currentWrap.style.display = 'none';
+    uploadArea.classList.remove('d-none');
 }
 </script>
 @endpush

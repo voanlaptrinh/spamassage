@@ -698,15 +698,6 @@ section { padding: 90px 24px; }
     animation: pulse-green 2s infinite;
 }
 
-.btn-zalo { background: #0088ff; }
-.btn-facebook { background: #1877F2; }
-.btn-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-.btn-tiktok { background: #000000; }
-.btn-youtube { background: #FF0000; }
-.btn-twitter { background: #000000; }
-.btn-linkedin { background: #0077B5; }
-.btn-whatsapp { background: #25D366; }
-.btn-viber { background: #7360F2; }
 
 @keyframes pulse-green {
     0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
@@ -721,10 +712,10 @@ section { padding: 90px 24px; }
         gap: 10px;
     }
     .floating-btn {
-        width: 48px;
-        height: 48px;
+        width: 40px;
+        height: 40px;
     }
-    .floating-btn i { font-size: 20px; }
-    .floating-btn img { width: 24px; height: 24px; }
+    .floating-btn i { font-size: 17px; }
+    .floating-btn img { width: 20px; height: 20px; }
     .floating-btn .btn-label { display: none; } /* Ẩn label trên mobile cho gọn */
 }

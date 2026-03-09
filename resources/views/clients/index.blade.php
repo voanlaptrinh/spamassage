@@ -70,6 +70,7 @@
     <main id="main-content" tabindex="-1">
 
         {{-- ===== HERO ===== --}}
+        @if ($banner->is_active)
         <section class="hero" id="home" aria-labelledby="hero-heading"
             @if ($banner->image) style="background-image: linear-gradient(135deg, rgba(26,18,9,.85) 0%, rgba(45,31,10,.8) 100%), url('{{ asset('storage/' . $banner->image) }}'); background-size: cover; background-position: center;" @endif>
             <div class="hero-content">
@@ -96,6 +97,7 @@
                 <i class="bi bi-chevron-down"></i>
             </div>
         </section>
+        @endif
 
         {{-- ===== INTRO POSTS SLIDER ===== --}}
         <section class="posts-section" id="posts" aria-labelledby="posts-heading">
@@ -135,7 +137,7 @@
                                             <div class="post-num" aria-hidden="true">Bài viết
                                                 {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div>
                                             <h3>{{ $post->title }}</h3>
-                                            <p>{{ strip_tags($post->content) }}</p>
+                                            <p>{!! $post->content !!}</p>
                                             <div>
                                                 <button class="btn-read-more"
                                                     onclick="openPostModal({{ $i }})"
@@ -293,36 +295,16 @@
                     </ul>
 
                     {{-- Mạng xã hội --}}
-                    @if ($cfg->facebook_url || $cfg->zalo_url || $cfg->instagram_url || $cfg->tiktok_url)
+                    @if ($socialLinks->isNotEmpty())
                         <nav aria-label="Mạng xã hội" class="contact-socials">
-                            @if ($cfg->facebook_url)
-                                <a href="{{ $cfg->facebook_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Facebook (mở tab mới)" class="csoc-btn">
-                                    <i class="bi bi-facebook" aria-hidden="true"></i>
-                                    <span>Facebook</span>
+                            @foreach ($socialLinks as $social)
+                                <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
+                                    aria-label="{{ $social->label }} (mở tab mới)" class="csoc-btn">
+                                    <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                                        width="20" height="20" style="object-fit:contain" aria-hidden="true">
+                                    <span>{{ $social->label }}</span>
                                 </a>
-                            @endif
-                            @if ($cfg->zalo_url)
-                                <a href="{{ $cfg->zalo_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Zalo (mở tab mới)" class="csoc-btn">
-                                    <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
-                                    <span>Zalo</span>
-                                </a>
-                            @endif
-                            @if ($cfg->instagram_url)
-                                <a href="{{ $cfg->instagram_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Instagram (mở tab mới)" class="csoc-btn">
-                                    <i class="bi bi-instagram" aria-hidden="true"></i>
-                                    <span>Instagram</span>
-                                </a>
-                            @endif
-                            @if ($cfg->tiktok_url)
-                                <a href="{{ $cfg->tiktok_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="TikTok (mở tab mới)" class="csoc-btn">
-                                    <i class="bi bi-tiktok" aria-hidden="true"></i>
-                                    <span>TikTok</span>
-                                </a>
-                            @endif
+                            @endforeach
                         </nav>
                     @endif
                 </div>
@@ -372,40 +354,19 @@
                     <div class="logo" aria-label="Spa Massage">Spa <span>Massage</span></div>
                     <p>Nơi bạn tìm lại sự cân bằng — thư giãn thân tâm, phục hồi năng lượng với những liệu trình chăm
                         sóc đẳng cấp.</p>
+                    @if ($socialLinks->isNotEmpty())
                     <nav aria-label="Mạng xã hội footer">
                         <div class="footer-socials">
-                            @if ($cfg->facebook_url ?? false)
-                                <a href="{{ $cfg->facebook_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Facebook (mở tab mới)">
-                                    <i class="bi bi-facebook" aria-hidden="true"></i>
+                            @foreach ($socialLinks as $social)
+                                <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
+                                    aria-label="{{ $social->label }} (mở tab mới)">
+                                    <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                                        width="18" height="18" style="object-fit:contain" aria-hidden="true">
                                 </a>
-                            @endif
-                            @if ($cfg->instagram_url ?? false)
-                                <a href="{{ $cfg->instagram_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Instagram (mở tab mới)">
-                                    <i class="bi bi-instagram" aria-hidden="true"></i>
-                                </a>
-                            @endif
-                            @if ($cfg->youtube_url ?? false)
-                                <a href="{{ $cfg->youtube_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="YouTube (mở tab mới)">
-                                    <i class="bi bi-youtube" aria-hidden="true"></i>
-                                </a>
-                            @endif
-                            @if ($cfg->tiktok_url ?? false)
-                                <a href="{{ $cfg->tiktok_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="TikTok (mở tab mới)">
-                                    <i class="bi bi-tiktok" aria-hidden="true"></i>
-                                </a>
-                            @endif
-                            @if ($cfg->zalo_url ?? false)
-                                <a href="{{ $cfg->zalo_url }}" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Zalo (mở tab mới)">
-                                    <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
-                                </a>
-                            @endif
+                            @endforeach
                         </div>
                     </nav>
+                    @endif
                 </div>
 
                 <nav aria-label="Điều hướng footer">
@@ -460,78 +421,15 @@
             </a>
         @endif
 
-        @if ($cfg->zalo_url ?? false)
-            <a href="{{ $cfg->zalo_url }}" target="_blank" rel="noopener noreferrer" class="floating-btn btn-zalo"
-                aria-label="Chat Zalo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
-                    width="24" height="24">
-                <span class="btn-label">Zalo</span>
+        @foreach ($socialLinks as $social)
+            <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
+                class="floating-btn" aria-label="{{ $social->label }}"
+                style="background:{{ $social->color }}">
+                <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                    width="24" height="24" style="object-fit:contain">
+                <span class="btn-label">{{ $social->label }}</span>
             </a>
-        @endif
-
-        @if ($cfg->facebook_url ?? false)
-            <a href="{{ $cfg->facebook_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-facebook" aria-label="Facebook">
-                <i class="bi bi-facebook"></i>
-                <span class="btn-label">Facebook</span>
-            </a>
-        @endif
-
-        @if ($cfg->instagram_url ?? false)
-            <a href="{{ $cfg->instagram_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-instagram" aria-label="Instagram">
-                <i class="bi bi-instagram"></i>
-                <span class="btn-label">Instagram</span>
-            </a>
-        @endif
-
-        @if ($cfg->tiktok_url ?? false)
-            <a href="{{ $cfg->tiktok_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-tiktok" aria-label="TikTok">
-                <i class="bi bi-tiktok"></i>
-                <span class="btn-label">TikTok</span>
-            </a>
-        @endif
-
-        @if ($cfg->youtube_url ?? false)
-            <a href="{{ $cfg->youtube_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-youtube" aria-label="YouTube">
-                <i class="bi bi-youtube"></i>
-                <span class="btn-label">YouTube</span>
-            </a>
-        @endif
-
-        @if ($cfg->twitter_url ?? false)
-            <a href="{{ $cfg->twitter_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-twitter" aria-label="Twitter">
-                <i class="bi bi-twitter-x"></i>
-                <span class="btn-label">Twitter</span>
-            </a>
-        @endif
-
-        @if ($cfg->linkedin_url ?? false)
-            <a href="{{ $cfg->linkedin_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-linkedin" aria-label="LinkedIn">
-                <i class="bi bi-linkedin"></i>
-                <span class="btn-label">LinkedIn</span>
-            </a>
-        @endif
-
-        @if ($cfg->whatsapp_url ?? false)
-            <a href="{{ $cfg->whatsapp_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-whatsapp" aria-label="WhatsApp">
-                <i class="bi bi-whatsapp"></i>
-                <span class="btn-label">WhatsApp</span>
-            </a>
-        @endif
-
-        @if ($cfg->viber_url ?? false)
-            <a href="{{ $cfg->viber_url }}" target="_blank" rel="noopener noreferrer"
-                class="floating-btn btn-viber" aria-label="Viber">
-                <i class="bi bi-chat-dots"></i>
-                <span class="btn-label">Viber</span>
-            </a>
-        @endif
+        @endforeach
     </div>
 
     <script>

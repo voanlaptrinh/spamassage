@@ -47,6 +47,7 @@
                         <th class="ps-4" style="width:70px">Ảnh</th>
                         <th>Tên gói dịch vụ</th>
                         <th style="width:170px">Giá</th>
+                        <th class="text-center" style="width:90px">Thứ tự</th>
                         <th class="text-center" style="width:120px">Trạng thái</th>
                         <th class="text-center" style="width:120px">Ngày tạo</th>
                         <th class="text-center pe-4" style="width:110px">Thao tác</th>
@@ -74,6 +75,9 @@
                             <span class="fw-bold text-primary">
                                 {{ number_format($item->price, 0, ',', '.') }}&thinsp;đ
                             </span>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-light text-dark border fw-semibold">{{ $item->sort_order }}</span>
                         </td>
                         <td class="text-center">
                             @if($item->is_active)
