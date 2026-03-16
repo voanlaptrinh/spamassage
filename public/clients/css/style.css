@@ -712,8 +712,8 @@ section { padding: 90px 24px; }
         gap: 10px;
     }
     .floating-btn {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
     }
     .floating-btn i { font-size: 17px; }
     .floating-btn img { width: 20px; height: 20px; }

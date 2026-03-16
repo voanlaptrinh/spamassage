@@ -19,6 +19,8 @@ use App\Models\Contact;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/2', [HomeController::class, 'index'])->name('homecs2');
+
 
 Route::post('/lien-he', function (\Illuminate\Http\Request $request) {
     $request->validate([
