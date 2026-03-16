@@ -14,11 +14,26 @@
     <link rel="canonical" href="{{ url()->current() }}" />
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icons/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/icons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('/icons/android-chrome-192x192.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/icons/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/source/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/source/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/source/icons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="144x144"
+        href="{{ asset('/source/icons/android-chrome-144x144.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('/source/icons/android-chrome-192x192.png') }}">
+
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/source/icons/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/source/icons/apple-touch-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/source/icons/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/source/icons/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/source/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/source/icons/apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/source/icons/apple-touch-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/source/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/source/icons/apple-touch-icon-76x76.png') }}">
+    <link rel="apple-touch-startup-image" href="{{ asset('/source/icons/apple-touch-icon-180x180.png') }}" />
+    <meta property="og:image" content="{{ URL::to('/source/icons/512x512.png') }}">
+    <meta itemprop="image" content="{{ asset('/source/icons/512x512.png') }}">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="website">
@@ -29,7 +44,7 @@
         content="{{ get_config()->meta_title ?? 'Spa Massage Thư Giãn - Liệu Pháp Phục Hồi Sức Khỏe Toàn Diện' }}">
     <meta property="og:description"
         content="{{ get_config()->meta_description ?? 'Trải nghiệm dịch vụ spa & massage chuyên nghiệp tại TP. Hồ Chí Minh.' }}">
-    <meta property="og:image" content="{{ asset('/icons/512x512.png') }}">
+
 
     <link rel="stylesheet" href="{{ asset('clients/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
