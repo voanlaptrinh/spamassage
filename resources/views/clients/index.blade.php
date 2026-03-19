@@ -14,26 +14,26 @@
     <link rel="canonical" href="{{ url()->current() }}" />
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/source/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/source/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/source/favicon-32x32.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/icons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="144x144"
-        href="{{ asset('/source/android-chrome-144x144.png') }}">
+        href="{{ asset('/icons/android-chrome-144x144.png') }}">
     <link rel="icon" type="image/png" sizes="192x192"
-        href="{{ asset('/source/android-chrome-192x192.png') }}">
+        href="{{ asset('/icons/android-chrome-192x192.png') }}">
 
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/source/apple-touch-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/source/apple-touch-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/source/apple-touch-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/source/apple-touch-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/source/apple-touch-icon.png') }}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/source/apple-touch-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/source/apple-touch-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/source/apple-touch-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/source/apple-touch-icon-76x76.png') }}">
-    <link rel="apple-touch-startup-image" href="{{ asset('/source/apple-touch-icon-180x180.png') }}" />
-    <meta property="og:image" content="{{ URL::to('/source/512x512.png') }}">
-    <meta itemprop="image" content="{{ asset('/source/512x512.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/icons/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/icons/apple-touch-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/icons/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/icons/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/icons/apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/icons/apple-touch-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/icons/apple-touch-icon-76x76.png') }}">
+    <link rel="apple-touch-startup-image" href="{{ asset('/icons/apple-touch-icon-180x180.png') }}" />
+    <meta property="og:image" content="{{ URL::to('/icons/512x512.png') }}">
+    <meta itemprop="image" content="{{ asset('/icons/512x512.png') }}">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="website">
@@ -46,7 +46,7 @@
         content="{{ get_config()->meta_description ?? 'Trải nghiệm dịch vụ spa & massage chuyên nghiệp tại TP. Hồ Chí Minh.' }}">
 
 
-    <link rel="stylesheet" href="{{ asset('clients/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('clients/css/style.css?v=1.0') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
@@ -59,8 +59,7 @@
     <header class="spa-header" id="spaHeader" role="banner">
         <div class="nav-inner">
             <a href="#home" class="nav-logo" aria-label="Trang chủ Spa Massage">
-                {{ get_config()->meta_title ? Str::words(get_config()->meta_title, 2, '') : 'Spa' }}
-                <span>Massage</span>
+                <img src="{{ asset('icons/logo_spa.svg') }}" alt="logo Spa Massage" class="img-fluid" aria-hidden="true">
             </a>
 
             <nav aria-label="Điều hướng chính">
@@ -366,7 +365,9 @@
         <div class="footer-inner">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="logo" aria-label="Spa Massage">Spa <span>Massage</span></div>
+                    <a href="#home" class="footer-logo" aria-label="Trang chủ Spa Massage">
+                        <img src="{{ asset('icons/logo_spa.svg') }}" alt="logo Spa Massage">
+                    </a>
                     <p>Nơi bạn tìm lại sự cân bằng — thư giãn thân tâm, phục hồi năng lượng với những liệu trình chăm
                         sóc đẳng cấp.</p>
                     @if ($socialLinks->isNotEmpty())
