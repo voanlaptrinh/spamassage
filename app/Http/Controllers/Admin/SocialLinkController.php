@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class SocialLinkController extends Controller
 {
@@ -29,9 +29,13 @@ class SocialLinkController extends Controller
             'color' => 'required|string|max:30',
         ]);
 
+        $file = $request->file('icon');
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/social_icons'), $filename);
+
         SocialLink::create([
             'label'      => $request->label,
-            'icon'       => $request->file('icon')->store('social_icons', 'public'),
+            'icon'       => 'uploads/social_icons/' . $filename,
             'url'        => $request->url,
             'color'      => $request->color,
             'is_active'  => $request->boolean('is_active'),
@@ -72,8 +76,13 @@ class SocialLinkController extends Controller
         ];
 
         if ($request->hasFile('icon')) {
-            Storage::disk('public')->delete($mangXaHoi->icon);
-            $data['icon'] = $request->file('icon')->store('social_icons', 'public');
+            if ($mangXaHoi->icon) {
+                File::delete(public_path($mangXaHoi->icon));
+            }
+            $file = $request->file('icon');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/social_icons'), $filename);
+            $data['icon'] = 'uploads/social_icons/' . $filename;
         }
 
         $mangXaHoi->update($data);
@@ -84,7 +93,7 @@ class SocialLinkController extends Controller
     public function destroy(SocialLink $mangXaHoi)
     {
         if ($mangXaHoi->icon) {
-            Storage::disk('public')->delete($mangXaHoi->icon);
+            File::delete(public_path($mangXaHoi->icon));
         }
         $mangXaHoi->delete();
         return redirect()->route('admin.mang_xa_hoi.index')->with('success', 'Đã xóa liên kết!');

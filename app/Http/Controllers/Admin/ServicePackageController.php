@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServicePackage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ServicePackageController extends Controller
 {
@@ -43,7 +43,10 @@ class ServicePackageController extends Controller
         $data['sort_order'] = (ServicePackage::max('sort_order') ?? 0) + 1;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('goi_dich_vu', 'public');
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/goi_dich_vu'), $filename);
+            $data['image'] = 'uploads/goi_dich_vu/' . $filename;
         }
 
         ServicePackage::create($data);
@@ -81,15 +84,18 @@ class ServicePackageController extends Controller
         $data['sort_order'] = $newOrder;
 
         if ($request->boolean('remove_image') && $goiDichVu->image) {
-            Storage::disk('public')->delete($goiDichVu->image);
+            File::delete(public_path($goiDichVu->image));
             $data['image'] = null;
         }
 
         if ($request->hasFile('image')) {
             if ($goiDichVu->image) {
-                Storage::disk('public')->delete($goiDichVu->image);
+                File::delete(public_path($goiDichVu->image));
             }
-            $data['image'] = $request->file('image')->store('goi_dich_vu', 'public');
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/goi_dich_vu'), $filename);
+            $data['image'] = 'uploads/goi_dich_vu/' . $filename;
         }
 
         $goiDichVu->update($data);
@@ -100,7 +106,7 @@ class ServicePackageController extends Controller
     public function destroy(ServicePackage $goiDichVu)
     {
         if ($goiDichVu->image) {
-            Storage::disk('public')->delete($goiDichVu->image);
+            File::delete(public_path($goiDichVu->image));
         }
 
         $goiDichVu->delete();

@@ -42,7 +42,7 @@
                             <div class="rounded-circle d-flex align-items-center justify-content-center overflow-hidden"
                                 style="width:40px;height:40px;background:{{ $item->color }}">
                                 @if($item->icon)
-                                    <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->label }}"
+                                    <img src="{{ asset($item->icon) }}" alt="{{ $item->label }}"
                                         style="width:22px;height:22px;object-fit:contain">
                                 @endif
                             </div>

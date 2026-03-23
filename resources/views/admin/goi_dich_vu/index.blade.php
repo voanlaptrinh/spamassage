@@ -58,7 +58,7 @@
                     <tr>
                         <td class="ps-4">
                             @if($item->image)
-                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
                                     class="rounded-2 border"
                                     style="width:52px;height:52px;object-fit:cover;">
                             @else

@@ -14,26 +14,26 @@
     <link rel="canonical" href="{{ url()->current() }}" />
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icons/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/icons/favicon-32x32.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/public/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/public/icons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/public/icons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="144x144"
-        href="{{ asset('/icons/android-chrome-144x144.png') }}">
+        href="{{ asset('/public/icons/android-chrome-144x144.png') }}">
     <link rel="icon" type="image/png" sizes="192x192"
-        href="{{ asset('/icons/android-chrome-192x192.png') }}">
+        href="{{ asset('/public/icons/android-chrome-192x192.png') }}">
 
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/icons/apple-touch-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/icons/apple-touch-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/icons/apple-touch-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/icons/apple-touch-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/icons/apple-touch-icon.png') }}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/icons/apple-touch-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/icons/apple-touch-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/icons/apple-touch-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/icons/apple-touch-icon-76x76.png') }}">
-    <link rel="apple-touch-startup-image" href="{{ asset('/icons/apple-touch-icon-180x180.png') }}" />
-    <meta property="og:image" content="{{ URL::to('/icons/512x512.png') }}">
-    <meta itemprop="image" content="{{ asset('/icons/512x512.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/public/icons/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/public/icons/apple-touch-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/public/icons/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/public/icons/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/public/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/public/icons/apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/public/icons/apple-touch-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/public/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/public/icons/apple-touch-icon-76x76.png') }}">
+    <link rel="apple-touch-startup-image" href="{{ asset('/public/icons/apple-touch-icon-180x180.png') }}" />
+    <meta property="og:image" content="{{ URL::to('/public/icons/512x512.png') }}">
+    <meta itemprop="image" content="{{ asset('/public/icons/512x512.png') }}">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="website">
@@ -59,7 +59,7 @@
     <header class="spa-header" id="spaHeader" role="banner">
         <div class="nav-inner">
             <a href="#home" class="nav-logo" aria-label="Trang chủ Spa Massage">
-                <img src="{{ asset('icons/logo_spa.svg') }}" alt="logo Spa Massage" class="img-fluid" aria-hidden="true">
+                <img src="{{ asset('public/icons/logo_spa.svg') }}" alt="logo Spa Massage" class="img-fluid" aria-hidden="true">
             </a>
 
             <nav aria-label="Điều hướng chính">
@@ -86,7 +86,7 @@
         {{-- ===== HERO ===== --}}
         @if ($banner->is_active)
         <section class="hero" id="home" aria-labelledby="hero-heading"
-            @if ($banner->image) style="background-image: linear-gradient(135deg, rgba(26,18,9,.85) 0%, rgba(45,31,10,.8) 100%), url('{{ asset('storage/' . $banner->image) }}'); background-size: cover; background-position: center;" @endif>
+            @if ($banner->image) style="background-image: linear-gradient(135deg, rgba(26,18,9,.85) 0%, rgba(45,31,10,.8) 100%), url('{{ asset($banner->image) }}'); background-size: cover; background-position: center;" @endif>
             <div class="hero-content">
                 @if ($banner->badge_text)
                     <div class="hero-badge" aria-hidden="true">{{ $banner->badge_text }}</div>
@@ -138,7 +138,7 @@
                                         aria-hidden="{{ $i === 0 ? 'false' : 'true' }}">
                                         <div class="post-slide-img">
                                             @if ($post->image)
-                                                <img src="{{ asset('storage/' . $post->image) }}"
+                                                <img src="{{ asset($post->image) }}"
                                                     alt="Ảnh minh họa bài viết: {{ $post->title }}">
                                             @else
                                                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:#e8d5b0"
@@ -216,7 +216,7 @@
                             <li class="service-card" role="listitem">
                                 <div class="service-img">
                                     @if ($pkg->image)
-                                        <img src="{{ asset('storage/' . $pkg->image) }}"
+                                        <img src="{{ asset($pkg->image) }}"
                                             alt="Ảnh minh họa dịch vụ {{ $pkg->name }}">
                                     @else
                                         <div class="no-img" role="img" aria-label="Không có ảnh dịch vụ">
@@ -314,7 +314,7 @@
                             @foreach ($socialLinks as $social)
                                 <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
                                     aria-label="{{ $social->label }} (mở tab mới)" class="csoc-btn">
-                                    <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                                    <img src="{{ asset($social->icon) }}" alt="{{ $social->label }}"
                                         width="20" height="20" style="object-fit:contain" aria-hidden="true">
                                     <span>{{ $social->label }}</span>
                                 </a>
@@ -366,7 +366,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#home" class="footer-logo" aria-label="Trang chủ Spa Massage">
-                        <img src="{{ asset('icons/logo_spa.svg') }}" alt="logo Spa Massage">
+                        <img src="{{ asset('public/icons/logo_spa.svg') }}" alt="logo Spa Massage">
                     </a>
                     <p>Nơi bạn tìm lại sự cân bằng — thư giãn thân tâm, phục hồi năng lượng với những liệu trình chăm
                         sóc đẳng cấp.</p>
@@ -376,7 +376,7 @@
                             @foreach ($socialLinks as $social)
                                 <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
                                     aria-label="{{ $social->label }} (mở tab mới)">
-                                    <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                                    <img src="{{ asset($social->icon) }}" alt="{{ $social->label }}"
                                         width="18" height="18" style="object-fit:contain" aria-hidden="true">
                                 </a>
                             @endforeach
@@ -441,7 +441,7 @@
             <a href="{{ $social->url }}" target="_blank" rel="noopener noreferrer"
                 class="floating-btn" aria-label="{{ $social->label }}"
                 style="background:{{ $social->color }}">
-                <img src="{{ asset('storage/' . $social->icon) }}" alt="{{ $social->label }}"
+                <img src="{{ asset($social->icon) }}" alt="{{ $social->label }}"
                     width="24" height="24" style="object-fit:contain">
                 <span class="btn-label">{{ $social->label }}</span>
             </a>

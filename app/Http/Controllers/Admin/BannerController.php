@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
@@ -38,15 +38,18 @@ class BannerController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->boolean('remove_image') && $banner->image) {
-            Storage::disk('public')->delete($banner->image);
+            File::delete(public_path($banner->image));
             $data['image'] = null;
         }
 
         if ($request->hasFile('image')) {
             if ($banner->image) {
-                Storage::disk('public')->delete($banner->image);
+                File::delete(public_path($banner->image));
             }
-            $data['image'] = $request->file('image')->store('banner', 'public');
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/banner'), $filename);
+            $data['image'] = 'uploads/banner/' . $filename;
         }
 
         $banner->update($data);

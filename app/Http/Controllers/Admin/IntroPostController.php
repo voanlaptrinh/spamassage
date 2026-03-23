@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\IntroPost;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class IntroPostController extends Controller
 {
@@ -42,7 +42,10 @@ class IntroPostController extends Controller
         $data['sort_order'] = (IntroPost::max('sort_order') ?? 0) + 1;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('bai_viet', 'public');
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/bai_viet'), $filename);
+            $data['image'] = 'uploads/bai_viet/' . $filename;
         }
 
         IntroPost::create($data);
@@ -79,15 +82,18 @@ class IntroPostController extends Controller
         $data['sort_order'] = $newOrder;
 
         if ($request->boolean('remove_image') && $baiViet->image) {
-            Storage::disk('public')->delete($baiViet->image);
+            File::delete(public_path($baiViet->image));
             $data['image'] = null;
         }
 
         if ($request->hasFile('image')) {
             if ($baiViet->image) {
-                Storage::disk('public')->delete($baiViet->image);
+                File::delete(public_path($baiViet->image));
             }
-            $data['image'] = $request->file('image')->store('bai_viet', 'public');
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/bai_viet'), $filename);
+            $data['image'] = 'uploads/bai_viet/' . $filename;
         }
 
         $baiViet->update($data);
@@ -98,7 +104,7 @@ class IntroPostController extends Controller
     public function destroy(IntroPost $baiViet)
     {
         if ($baiViet->image) {
-            Storage::disk('public')->delete($baiViet->image);
+            File::delete(public_path($baiViet->image));
         }
 
         $baiViet->delete();

@@ -152,7 +152,7 @@
 
                         @if($banner->image)
                         <div id="currentWrap" class="mb-3">
-                            <img src="{{ asset('storage/' . $banner->image) }}" alt="Banner hiện tại"
+                            <img src="{{ asset($banner->image) }}" alt="Banner hiện tại"
                                 class="w-100 rounded-3 border" style="object-fit:cover;max-height:160px;">
                             <div class="mt-2 d-flex align-items-center justify-content-between">
                                 <small class="text-muted d-flex align-items-center gap-1">

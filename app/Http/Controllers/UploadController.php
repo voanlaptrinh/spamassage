@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UploadController extends Controller
 {
@@ -13,9 +13,11 @@ class UploadController extends Controller
             'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
-        $path = $request->file('file')->store('tyniimage', 'public');
+        $file = $request->file('file');
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/tyniimage'), $filename);
 
-        $location = asset('storage/' . $path);
+        $location = asset('uploads/tyniimage/' . $filename);
 
         return response()->json(['location' => $location]);
     }
@@ -27,11 +29,10 @@ class UploadController extends Controller
             return response()->json(['message' => 'Không có đường dẫn ảnh'], 400);
         }
 
-        // Chuyển URL → đường dẫn tương đối trong storage/public
-        $relativePath = str_replace(asset('storage') . '/', '', $imageUrl);
+        $relativePath = ltrim(parse_url($imageUrl, PHP_URL_PATH), '/');
 
-        if (Storage::disk('public')->exists($relativePath)) {
-            Storage::disk('public')->delete($relativePath);
+        if (File::exists(public_path($relativePath))) {
+            File::delete(public_path($relativePath));
             return response()->json(['message' => 'Ảnh đã được xóa']);
         }
 

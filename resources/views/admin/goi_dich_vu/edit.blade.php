@@ -157,7 +157,7 @@
                     {{-- Ảnh hiện tại --}}
                     @if($item->image)
                     <div id="currentWrap" class="mb-3">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                        <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
                             class="w-100 rounded-3 border" style="object-fit:cover;max-height:200px;">
                         <div class="mt-2 d-flex align-items-center justify-content-between">
                             <small class="text-muted d-flex align-items-center gap-1">

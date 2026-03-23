@@ -48,7 +48,7 @@
                         @if($item->icon)
                         <div id="currentWrap" class="mb-2">
                             <div class="d-flex align-items-center gap-3 p-3 rounded-3 border bg-light">
-                                <img src="{{ asset('storage/' . $item->icon) }}" alt="{{ $item->label }}"
+                                <img src="{{ asset($item->icon) }}" alt="{{ $item->label }}"
                                     style="width:48px;height:48px;object-fit:contain;border-radius:8px;background:#fff;padding:4px;border:1px solid #dee2e6">
                                 <div>
                                     <small class="text-muted d-flex align-items-center gap-1">
@@ -149,7 +149,7 @@
                         <div id="btnPreview" class="rounded-circle d-inline-flex align-items-center justify-content-center"
                             style="width:54px;height:54px;background:{{ old('color', $item->color) }}">
                             @if($item->icon)
-                                <img id="btnPreviewImg" src="{{ asset('storage/' . $item->icon) }}" alt=""
+                                <img id="btnPreviewImg" src="{{ asset($item->icon) }}" alt=""
                                     style="width:28px;height:28px;object-fit:contain">
                                 <i id="btnPreviewIcon" class="bi bi-image text-white fs-5" style="display:none"></i>
                             @else
